@@ -108,8 +108,8 @@
 
     function calculateCdc(dateStr) {
         try {
-            const baseDate = new Date('1995-01-01');
-            const enteredDate = new Date(dateStr);
+            const baseDate = new Date('1995-01-01T00:00:00Z');
+            const enteredDate = new Date(dateStr + 'T00:00:00Z');
             if (isNaN(enteredDate)) {
                 alert("Invalid Date. Please enter the date in MM-DD-YYYY format.");
                 return null;
@@ -124,11 +124,11 @@
 
     function calculateDate(cdcValue) {
         try {
-            const baseDate = new Date('1995-01-01');
+            const baseDate = new Date('1995-01-01T00:00:00Z');
             const targetDate = new Date(baseDate.getTime() + (cdcValue - 1) * 24 * 60 * 60 * 1000);
-            const month = targetDate.getMonth() + 1;
-            const day = targetDate.getDate();
-            const year = targetDate.getFullYear();
+            const month = targetDate.getUTCMonth() + 1;
+            const day = targetDate.getUTCDate();
+            const year = targetDate.getUTCFullYear();
             return `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}-${year}`;
         } catch (error) {
             alert("Invalid CDC. Please enter a valid CDC value.");
