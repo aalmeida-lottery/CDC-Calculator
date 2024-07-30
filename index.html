@@ -27,8 +27,7 @@
             margin-bottom: 15px;
         }
         label {
-            display: block;
-            margin-bottom: 5px;
+            margin-left: 5px;
             font-weight: bold;
         }
         input[type="text"], select {
@@ -38,8 +37,16 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        input[type="radio"] {
-            margin-right: 10px;
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .radio-group input[type="radio"] {
+            margin-right: 5px;
+        }
+        .radio-group label {
+            margin-right: 15px;
         }
         button {
             width: 100%;
@@ -67,7 +74,7 @@
 <body onload="brython()">
 
 <div class="container">
-    <div class="input-group">
+    <div class="radio-group">
         <input type="radio" id="dateRadio" name="inputType" value="date" checked>
         <label for="dateRadio">Enter DATE</label>
         <input type="radio" id="cdcRadio" name="inputType" value="cdc">
@@ -79,7 +86,7 @@
         <input type="text" id="dateInput" placeholder="MM-DD-YYYY">
     </div>
 
-    <div class="input-group" id="cdcInputGroup">
+    <div class="input-group" id="cdcInputGroup" style="display: none;">
         <label for="cdcInput">Enter CDC:</label>
         <input type="text" id="cdcInput">
     </div>
