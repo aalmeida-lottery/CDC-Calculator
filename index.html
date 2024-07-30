@@ -82,7 +82,7 @@
         <input type="text" id="cdcInput">
     </div>
 
-    <button onclick="onCalculate()">Calculate</button>
+    <button id="calculateButton">Calculate</button>
 
     <div class="result" id="resultLabel"></div>
 </div>
@@ -110,7 +110,7 @@ def calculate_date(cdc_value):
         alert("Invalid CDC. Please enter a valid CDC value.")
         return None
 
-def changeInputType():
+def changeInputType(event):
     input_type = document["inputType"].value
     if input_type == "date":
         document["dateInputGroup"].style.display = "block"
@@ -119,7 +119,7 @@ def changeInputType():
         document["dateInputGroup"].style.display = "none"
         document["cdcInputGroup"].style.display = "block"
 
-def onCalculate():
+def onCalculate(event):
     input_type = document["inputType"].value
     result_label = document["resultLabel"]
     if input_type == "date":
@@ -133,9 +133,8 @@ def onCalculate():
         if date_str is not None:
             result_label.text = f"Date: {date_str}"
 
+document["calculateButton"].bind("click", onCalculate)
 document["inputType"].bind("change", changeInputType)
-document["dateInput"].bind("input", onCalculate)
-document["cdcInput"].bind("input", onCalculate)
 </script>
 
 </body>
