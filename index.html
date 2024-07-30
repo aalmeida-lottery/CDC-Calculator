@@ -1,161 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDC Date Calculator</title>
-    <style>
-        body {
-            font-family: Helvetica, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
-            margin-left: 5px;
-            font-weight: bold;
-        }
-        input[type="text"], select {
-            width: calc(100% - 22px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .radio-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .radio-group input[type="radio"] {
-            margin-right: 5px;
-        }
-        .radio-group label {
-            margin-right: 15px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            text-align: center;
-        }
-    </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js"></script>
-</head>
-<body onload="brython()">
-
-<div class="container">
-    <div class="radio-group">
-        <input type="radio" id="dateRadio" name="inputType" value="date" checked>
-        <label for="dateRadio">Enter DATE</label>
-        <input type="radio" id="cdcRadio" name="inputType" value="cdc">
-        <label for="cdcRadio">Enter CDC</label>
-    </div>
-
-    <div class="input-group" id="dateInputGroup">
-        <label for="dateInput">Enter DATE (MM-DD-YYYY):</label>
-        <input type="text" id="dateInput" placeholder="MM-DD-YYYY">
-    </div>
-
-    <div class="input-group" id="cdcInputGroup" style="display: none;">
-        <label for="cdcInput">Enter CDC:</label>
-        <input type="text" id="cdcInput">
-    </div>
-
-    <button id="calculateButton">Calculate</button>
-
-    <div class="result" id="resultLabel"></div>
-</div>
-
-<script type="text/python">
-from browser import document, alert
-from datetime import datetime, timedelta
-
-def calculate_cdc(date_str):
-    try:
-        base_date = datetime.strptime("01-Jan-95", "%d-%b-%y")
-        entered_date = datetime.strptime(date_str, "%m-%d-%Y")
-        delta = entered_date - base_date
-        return delta.days + 1
-    except ValueError:
-        alert("Invalid Date. Please enter the date in MM-DD-YYYY format.")
-        return None
-
-def calculate_date(cdc_value):
-    try:
-        base_date = datetime.strptime("01-Jan-95", "%d-%b-%y")
-        target_date = base_date + timedelta(days=int(cdc_value) - 1)
-        return target_date.strftime("%m-%d-%Y")
-    except ValueError:
-        alert("Invalid CDC. Please enter a valid CDC value.")
-        return None
-
-def changeInputType(event):
-    if document["dateRadio"].checked:
-        document["dateInputGroup"].style.display = "block"
-        document["cdcInputGroup"].style.display = "none"
-    else:
-        document["dateInputGroup"].style.display = "none"
-        document["cdcInputGroup"].style.display = "block"
-
-def onCalculate(event):
-    result_label = document["resultLabel"]
-    if document["dateRadio"].checked:
-        date_str = document["dateInput"].value
-        cdc_value = calculate_cdc(date_str)
-        if cdc_value is not None:
-            result_label.text = f"CDC: {cdc_value}"
-    else:
-        cdc_value = document["cdcInput"].value
-        date_str = calculate_date(cdc_value)
-        if date_str is not None:
-            result_label.text = f"Date: {date_str}"
-
-document["calculateButton"].bind("click", onCalculate)
-document["dateRadio"].bind("change", changeInputType)
-document["cdcRadio"].bind("change", changeInputType)
-
-# Initialize to ensure the correct input field is displayed
-changeInputType(None)
-</script>
-
-</body>
-</html>
- -->
-
-
-
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -230,12 +73,11 @@ changeInputType(None)
 <body>
 
 <div class="container">
-    <div class="input-group">
-        <label for="inputType">Select Input Type:</label>
-        <select id="inputType">
-            <option value="date">Enter DATE</option>
-            <option value="cdc">Enter CDC</option>
-        </select>
+    <div class="radio-group">
+        <input type="radio" id="dateRadio" name="inputType" value="date" checked>
+        <label for="dateRadio">Enter DATE</label>
+        <input type="radio" id="cdcRadio" name="inputType" value="cdc">
+        <label for="cdcRadio">Enter CDC</label>
     </div>
 
     <div class="input-group" id="dateInputGroup">
@@ -254,15 +96,14 @@ changeInputType(None)
 </div>
 
 <script>
-    document.getElementById('inputType').addEventListener('change', function () {
-        const inputType = this.value;
-        if (inputType === 'date') {
-            document.getElementById('dateInputGroup').style.display = 'block';
-            document.getElementById('cdcInputGroup').style.display = 'none';
-        } else {
-            document.getElementById('dateInputGroup').style.display = 'none';
-            document.getElementById('cdcInputGroup').style.display = 'block';
-        }
+    document.getElementById('dateRadio').addEventListener('change', function () {
+        document.getElementById('dateInputGroup').style.display = 'block';
+        document.getElementById('cdcInputGroup').style.display = 'none';
+    });
+
+    document.getElementById('cdcRadio').addEventListener('change', function () {
+        document.getElementById('dateInputGroup').style.display = 'none';
+        document.getElementById('cdcInputGroup').style.display = 'block';
     });
 
     function calculateCdc(dateStr) {
@@ -285,7 +126,10 @@ changeInputType(None)
         try {
             const baseDate = new Date('1995-01-01');
             const targetDate = new Date(baseDate.getTime() + (cdcValue - 1) * 24 * 60 * 60 * 1000);
-            return targetDate.toISOString().split('T')[0];
+            const month = targetDate.getMonth() + 1;
+            const day = targetDate.getDate();
+            const year = targetDate.getFullYear();
+            return `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}-${year}`;
         } catch (error) {
             alert("Invalid CDC. Please enter a valid CDC value.");
             return null;
@@ -293,7 +137,7 @@ changeInputType(None)
     }
 
     function onCalculate() {
-        const inputType = document.getElementById('inputType').value;
+        const inputType = document.querySelector('input[name="inputType"]:checked').value;
         let result = '';
 
         if (inputType === 'date') {
