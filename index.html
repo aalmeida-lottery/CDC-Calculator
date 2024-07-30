@@ -147,7 +147,7 @@
                 result = `CDC: ${cdcValue}`;
             }
         } else {
-            const cdcValue = document.getElementById('cdcInput').value;
+            const cdcValue = parseInt(document.getElementById('cdcInput').value, 10);
             const dateStr = calculateDate(cdcValue);
             if (dateStr !== null) {
                 result = `Date: ${dateStr}`;
