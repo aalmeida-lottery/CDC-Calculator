@@ -106,11 +106,22 @@
         document.getElementById('cdcInputGroup').style.display = 'block';
     });
 
+    function parseDate(dateStr) {
+        const parts = dateStr.split('-');
+        if (parts.length !== 3) {
+            return null;
+        }
+        const month = parseInt(parts[0], 10) - 1;
+        const day = parseInt(parts[1], 10);
+        const year = parseInt(parts[2], 10);
+        return new Date(Date.UTC(year, month, day));
+    }
+
     function calculateCdc(dateStr) {
         try {
-            const baseDate = new Date('1995-01-01T00:00:00Z');
-            const enteredDate = new Date(dateStr + 'T00:00:00Z');
-            if (isNaN(enteredDate)) {
+            const baseDate = new Date(Date.UTC(1995, 0, 1)); // January 1, 1995
+            const enteredDate = parseDate(dateStr);
+            if (enteredDate === null || isNaN(enteredDate.getTime())) {
                 alert("Invalid Date. Please enter the date in MM-DD-YYYY format.");
                 return null;
             }
@@ -124,7 +135,7 @@
 
     function calculateDate(cdcValue) {
         try {
-            const baseDate = new Date('1995-01-01T00:00:00Z');
+            const baseDate = new Date(Date.UTC(1995, 0, 1)); // January 1, 1995
             const targetDate = new Date(baseDate.getTime() + (cdcValue - 1) * 24 * 60 * 60 * 1000);
             const month = targetDate.getUTCMonth() + 1;
             const day = targetDate.getUTCDate();
