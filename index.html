@@ -86,7 +86,7 @@
         <input type="text" id="dateInput" placeholder="MM-DD-YYYY">
     </div>
 
-    <div class="input-group" id="cdcInputGroup" style="display: none;">
+    <div class="input-group" id="cdcInputGroup">
         <label for="cdcInput">Enter CDC:</label>
         <input type="text" id="cdcInput">
     </div>
@@ -143,6 +143,9 @@ def onCalculate(event):
 document["calculateButton"].bind("click", onCalculate)
 document["dateRadio"].bind("change", changeInputType)
 document["cdcRadio"].bind("change", changeInputType)
+
+# Initialize to ensure the correct input field is displayed
+changeInputType(None)
 </script>
 
 </body>
