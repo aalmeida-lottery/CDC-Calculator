@@ -32,11 +32,14 @@
             font-weight: bold;
         }
         input[type="text"], select {
-            width: 100%;
+            width: calc(100% - 22px);
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
         }
         button {
             width: 100%;
@@ -65,11 +68,10 @@
 
 <div class="container">
     <div class="input-group">
-        <label for="inputType">Select Input Type:</label>
-        <select id="inputType" onchange="changeInputType()">
-            <option value="date">Enter DATE</option>
-            <option value="cdc">Enter CDC</option>
-        </select>
+        <input type="radio" id="dateRadio" name="inputType" value="date" checked>
+        <label for="dateRadio">Enter DATE</label>
+        <input type="radio" id="cdcRadio" name="inputType" value="cdc">
+        <label for="cdcRadio">Enter CDC</label>
     </div>
 
     <div class="input-group" id="dateInputGroup">
@@ -111,8 +113,7 @@ def calculate_date(cdc_value):
         return None
 
 def changeInputType(event):
-    input_type = document["inputType"].value
-    if input_type == "date":
+    if document["dateRadio"].checked:
         document["dateInputGroup"].style.display = "block"
         document["cdcInputGroup"].style.display = "none"
     else:
@@ -120,9 +121,8 @@ def changeInputType(event):
         document["cdcInputGroup"].style.display = "block"
 
 def onCalculate(event):
-    input_type = document["inputType"].value
     result_label = document["resultLabel"]
-    if input_type == "date":
+    if document["dateRadio"].checked:
         date_str = document["dateInput"].value
         cdc_value = calculate_cdc(date_str)
         if cdc_value is not None:
@@ -134,7 +134,8 @@ def onCalculate(event):
             result_label.text = f"Date: {date_str}"
 
 document["calculateButton"].bind("click", onCalculate)
-document["inputType"].bind("change", changeInputType)
+document["dateRadio"].bind("change", changeInputType)
+document["cdcRadio"].bind("change", changeInputType)
 </script>
 
 </body>
